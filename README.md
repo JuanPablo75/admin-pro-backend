@@ -5,7 +5,7 @@ Recuerden instalar paquetes:
 npm install
 ````
 
-Para iniciar la Aplicación de Angular:
+Para iniciar el Server:
 ````
-ng serve -o
+npm run start:dev
 ```
