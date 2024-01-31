@@ -92,7 +92,7 @@ const borrarMedico = async (req, res = response) => {
         if(!medicoDB){
 
             return res.status(404).json({
-                ok: true,
+                ok: false,
                 msg: 'Medico no encontrado por ID'
             })
         }

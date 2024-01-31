@@ -48,7 +48,7 @@ const actualizarHospital = async (req, res = response) => {
 
         if(!hospitalDB){
             return res.status(404).json ({
-                ok: true,
+                ok: false,
                 msg: "Hospital no encontrado por ID."
             })
         }
@@ -86,7 +86,7 @@ const borrarHospital = async (req, res = response) => {
         if(!hospitalDB){
 
             return res.status(404).json({
-                ok: true,
+                ok: false,
                 msg: 'Hospital no encontrado por ID'
             })
         }
