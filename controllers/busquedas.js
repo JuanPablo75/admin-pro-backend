@@ -32,6 +32,7 @@ const getDocumentosColeccion = async (req, res = response) => {
     const tabla     = req.params.tabla;
     const busqueda  = req.params.busqueda;
     const regex     = new RegExp( busqueda, 'i' ); 
+    const desde = Number (req.query.desde) || 0;
 
     let data = [];
 
@@ -51,7 +52,9 @@ const getDocumentosColeccion = async (req, res = response) => {
 
         case 'usuarios':
             data = await Usuario.find({ nombre: regex })
-                                .lean();
+                                .lean()
+                                .skip(desde)
+                                .limit(5);
             break;
 
         default:

@@ -151,11 +151,11 @@ const eliminarUsuario = async (req, res = response) => {
             })
         }
 
-        await Usuario.findOneAndDelete( uid );
+        await Usuario.findOneAndDelete( {_id: uid} );
 
         res.status(200).json({
             ok:true,
-            msg:'Usuario eliminado correctamente',
+            msg:`Usuario ${usuarioDB.nombre} eliminado correctamente`,
             usuario: usuarioDB
         })
 
