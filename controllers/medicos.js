@@ -4,13 +4,24 @@ const Medico = require('../models/medico');
 
 const getMedicos = async (req, res = response) => {
 
-    const medicos = await Medico.find()
-                                .populate('usuario', 'nombre img')
-                                .populate('hospital', 'nombre img');
-                                
-    res.json({
+    const desde = Number (req.query.desde) || 0;
+
+    const [ medicos, total ] = await Promise.all([
+
+        Medico
+        .find()
+        .populate('usuario', '_id')
+        .populate('hospital', 'nombre img')
+        .skip( desde )
+        .limit( 5 ),
+
+        Medico.countDocuments()
+    ])
+
+    res.status(200).json({
         ok: true,
-        medicos
+        medicos,
+        total
     })
 }
 
@@ -114,10 +125,32 @@ const borrarMedico = async (req, res = response) => {
     }
 }
 
+const getMedicoById = async(req, res = response) =>{
+
+    const id = req.params.id;
+    try{
+
+        const medico = await Medico.findById(id)
+                                    .populate('usuario', 'nombre img')
+                                    .populate('hospital', 'nombre img');
+        
+        res.json({
+            ok:true,
+            medico
+        })
+    } catch(err){
+        console.log(err);
+        res.json({
+            ok:false,
+            msg: 'Hable con el administrador'
+        })
+    }
+}
 
 module.exports = {
     getMedicos,
     crearMedico,
     actualizarMedico,
-    borrarMedico
+    borrarMedico,
+    getMedicoById
 }
