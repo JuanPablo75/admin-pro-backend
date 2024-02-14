@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const Usuario = require('../models/usuario');
 const { generarJWT } = require('../helpers/jwt');
 const { googleVerify } = require('../helpers/google-verify');
+const { getMenuFrontEnd } = require('../helpers/menu-frontend');
 
 /**
  * Controlador para el inicio de sesión de usuarios mediante credenciales (email y contraseña).
@@ -38,7 +39,8 @@ const login = async (req, res) => {
         // Enviar la respuesta con el token generado
         res.json({
             ok: true,
-            token
+            token,
+            menu: getMenuFrontEnd( usuarioDB.role )
         });
     } catch (error) {
         // Manejar errores internos del servidor
@@ -46,7 +48,7 @@ const login = async (req, res) => {
         res.status(500).json({
             ok: false,
             msg: 'Error interno del servidor. Por favor, hable con el administrador.'
-        });
+        }); 
     }
 };
 
@@ -89,7 +91,8 @@ const googleSignIn = async (req, res) => {
         res.json({
             ok: true,
             email, name, picture,
-            token
+            token,
+            menu: getMenuFrontEnd( usuario.role )
         });
     } catch (err) {
         // Manejar errores al verificar el token de Google
@@ -119,7 +122,8 @@ const renewToken = async (req, res = response) => {
     res.json({
         ok: true,
         token,
-        usuario
+        usuario,
+        menu: getMenuFrontEnd( usuario.role )
     });
 };
 
