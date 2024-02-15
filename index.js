@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const express = require ('express');
 var cors = require('cors');
+const path = require('path');
 
 const { dbConnection } = require('./database/config.js')
 
@@ -34,7 +35,7 @@ app.use('/api/upload', require('./routes/uploads'));
 
 //
 app.get('*' , (req, res) => {
-    res.sendFile(path.join(__dirname, '../public', 'index.html'));  //cuando no se encuentra una ruta en particular lo devuelve a la pagina principal
+    res.sendFile( path.join( __dirname, '../public', 'index.html' ));  //cuando no se encuentra una ruta en particular lo devuelve a la pagina principal
 });
 
 app.listen( process.env.PORT, () => {
