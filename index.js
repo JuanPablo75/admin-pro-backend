@@ -33,11 +33,11 @@ app.use('/api/login', require('./routes/auth'));
 app.use('/api/upload', require('./routes/uploads'));
 
 //
-app.get('*' , (req, res)=>{
-    res.sendFile( path.resolve( __dirname , '/public/index.html'));  //cuando no se encuentra una ruta en particular lo devuelve a la pagina principal
+app.get('*' , (req, res) => {
+    res.sendFile( path.resolve( __dirname , '../public/index.html'));  //cuando no se encuentra una ruta en particular lo devuelve a la pagina principal
 });
 
-app.listen( process.env.PORT, () =>{
+app.listen( process.env.PORT, () => {
     console.log("Servidor corriendo en el puerto: " , process.env.PORT)
 });
 
