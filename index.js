@@ -34,7 +34,7 @@ app.use('/api/upload', require('./routes/uploads'));
 
 //
 app.get('*' , (req, res) => {
-    res.sendFile( path.resolve( __dirname , '../public/index.html'));  //cuando no se encuentra una ruta en particular lo devuelve a la pagina principal
+    res.sendFile(path.join(__dirname, '../public', 'index.html'));  //cuando no se encuentra una ruta en particular lo devuelve a la pagina principal
 });
 
 app.listen( process.env.PORT, () => {
