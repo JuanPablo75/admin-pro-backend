@@ -6,8 +6,6 @@ const path = require('path');
 
 const { dbConnection } = require('./database/config.js')
 
-// console.log(process.env)
-
 //Crear el servidor de Express
 const app = express();
 
@@ -20,10 +18,8 @@ app.use(express.static('public'));
 // Lectura y parseo del body
 app.use(express.json());
 
-
 //Base de datos
 dbConnection();
-
 
 //Rutas
 app.use('/api/usuarios', require('./routes/usuarios'));
@@ -35,7 +31,7 @@ app.use('/api/upload', require('./routes/uploads'));
 
 //
 app.get('*' , (req, res) => {
-    res.sendFile( path.resolve( __dirname , '../public/index.html'));  //cuando no se encuentra una ruta en particular lo devuelve a la pagina principal
+    res.sendFile( path.resolve( __dirname , 'public/index.html'));  //cuando no se encuentra una ruta en particular lo devuelve a la pagina principal
 });
 
 app.listen( process.env.PORT, () => {
